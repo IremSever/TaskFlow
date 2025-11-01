@@ -27,7 +27,7 @@ struct HomeView: View {
             .ignoresSafeArea()
             
             ScrollView {
-                VStack(spacing: 20) {
+                VStack(spacing: 16) {
                     SectionTitle("Anasayfa")
                     SectionSubTitle("Bugün Özeti")
                     summaryRow
@@ -64,10 +64,20 @@ extension HomeView {
 
     private var shortcutsGrid: some View {
         LazyVGrid(columns: [GridItem(.flexible(), spacing: cardSpacing), GridItem(.flexible(), spacing: cardSpacing)], spacing: cardSpacing) {
-            NavigationLink { TaskListView() } label: { QuickCard(title: "Görevlerim", icon: "checklist", corner: corner) }
-            NavigationLink { LocationView() } label: { QuickCard(title: "Konumum", icon: "location.circle", corner: corner) }
-            NavigationLink { ReportsView() } label: { QuickCard(title: "Raporlarım", icon: "doc.text", corner: corner) }
-            NavigationLink { SettingsView() } label: { QuickCard(title: "Ayarlar", icon: "gearshape", corner: corner) }
+            NavigationLink { TaskListView(isRoot: false) } label: {
+                QuickCard(title: "Görevlerim", icon: "checklist", corner: corner)
+            }
+            NavigationLink { LocationView(isRoot: false) } label: {
+                QuickCard(title: "Konumum", icon: "location.circle", corner: corner)
+            }
+            
+            NavigationLink { ReportsView(isRoot: false) } label: {
+                QuickCard(title: "Raporlarım", icon: "doc.text", corner: corner)
+            }
+            
+            NavigationLink { SettingsView(isRoot: false) } label: {
+                QuickCard(title: "Ayarlar", icon: "gearshape", corner: corner)
+            }
         }
     }
     

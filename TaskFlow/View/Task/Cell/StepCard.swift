@@ -16,7 +16,7 @@ struct StepCard<Content: View>: View {
     
     var body: some View {
         AppCard(corner: corner) {
-            VStack(spacing: 4) {
+            VStack(alignment: .center, spacing: 4) {
                 
                 Text(title)
                     .font(.custom("Helvetica-Bold", size: 12))

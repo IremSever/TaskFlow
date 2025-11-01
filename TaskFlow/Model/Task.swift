@@ -26,29 +26,52 @@ struct Assignee: Codable, Identifiable, Hashable {
     var name: String
     var email: String
 }
-
 enum TaskStatus: String, CaseIterable, Codable {
     case planned, todo, inProgress, qa, done
 
+    var title: String {
+        switch self {
+        case .planned:
+            return "Planlandı"
+        case .todo:
+            return "Yapılacak"
+        case .inProgress:
+            return "Çalışmada"
+        case .qa:
+            return "Kontrol"
+        case .done:
+            return "Tamamlandı"
+        }
+    }
+
     var next: TaskStatus? {
         switch self {
-        case .planned:    return .todo
-        case .todo:       return .inProgress
-        case .inProgress: return .qa
-        case .qa:         return .done
-        case .done:       return nil
+        case .planned:
+            return .todo
+        case .todo:
+            return .inProgress
+        case .inProgress:
+            return .qa
+        case .qa:
+            return .done
+        case .done:
+            return nil
         }
     }
 }
-
 extension TaskStatus {
     var tint: Color {
         switch self {
-        case .planned: return .orange
-        case .todo: return .blue
-        case .inProgress: return .purple
-        case .qa: return .cyan
-        case .done: return .green
+        case .planned:
+            return .orange.opacity(0.5)
+        case .todo:
+            return .blue.opacity(0.5)
+        case .inProgress:
+            return .purple.opacity(0.5)
+        case .qa:
+            return .cyan.opacity(0.5)
+        case .done:
+            return .green.opacity(0.5)
         }
     }
 }

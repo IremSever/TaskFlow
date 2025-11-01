@@ -41,7 +41,6 @@ final class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDele
 
     func stop() { manager.stopUpdatingLocation() }
 
-    // CLLocationManagerDelegate
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         refreshStatus()
         if manager.authorizationStatus == .authorizedWhenInUse || manager.authorizationStatus == .authorizedAlways {

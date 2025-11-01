@@ -69,7 +69,7 @@ struct ExportSheet: View {
                             UIPasteboard.general.url = url
                         }
                     }
-                    ActionPill(title: "Dosyalara Kaydet", icon: "folder") {
+                    ActionPill(title: "Kaydet", icon: "folder") {
                         presentExportPicker(url)
                     }
                     ActionPill(title: "Paylaş", icon: "square.and.arrow.up") {
@@ -111,8 +111,8 @@ struct ActionPill: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                Image(systemName: icon).font(.system(size: 15, weight: .semibold))
-                Text(title).font(.custom("Helvetica-Bold", size: 15))
+                Image(systemName: icon).font(.system(size: 12, weight: .semibold))
+                Text(title).font(.custom("Helvetica-SemiBold", size: 12))
             }
             .foregroundColor(.primary)
             .padding(.vertical, 10)

@@ -9,9 +9,6 @@ import SwiftUI
 import FirebaseAuth
 import FirebaseFirestore
 import Combine
-import SwiftUI
-import FirebaseAuth
-import FirebaseFirestore
 
 @MainActor
 final class AuthViewModel: ObservableObject {

@@ -8,7 +8,6 @@ import SwiftUI
 import Combine
 import FirebaseFirestore
 import Foundation
-import SwiftUI
 
 @MainActor
 final class SettingsViewModel: ObservableObject {
@@ -27,7 +26,6 @@ final class SettingsViewModel: ObservableObject {
 
     func exportJSON() async {
         do {
-            // Buraya gerçek veri toplayıp encode edebilirsiniz.
             let data = try JSONEncoder().encode([String: String]())
             let url = FileManager.default.temporaryDirectory
                 .appendingPathComponent("TaskFlow_Export.json")

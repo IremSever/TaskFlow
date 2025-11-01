@@ -9,88 +9,71 @@ import PDFKit
 import UIKit
 
 struct ReportsView: View {
+    var isRoot: Bool = true
     @StateObject private var vm = ReportsViewModel()
-    @State private var selectedTask: TFTask?           // <- seçili görev
-    @State private var selectedReportURL: URL?
+    @Environment(\.colorScheme) private var colorScheme
+    private let corner: CGFloat = 22
 
     var body: some View {
-        NavigationStack {
-            VStack {
-                if vm.completedTasks.isEmpty {
-                    ContentUnavailableView("Henüz tamamlanmış görev yok",
-                                           systemImage: "doc.text")
-                } else {
-                    List(vm.completedTasks) { task in
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("TASKFLOW_\(task.id.prefix(8)).pdf")
-                                .font(.headline)
-                            Text("Süre: \(vm.duration(for: task)) • \(vm.slaText(for: task))")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                        // satıra dokununca seç
-                        .contentShape(Rectangle())
-                        .onTapGesture { selectedTask = task }
-                        .contextMenu {
-                            Button("PDF Aç") {
-                                Task {
-                                    if let url = try? await vm.openPDF(for: task) {
-                                        selectedReportURL = url
+        ZStack {
+            (colorScheme == .dark ? Color.black : Color.white).ignoresSafeArea()
+            LinearGradient(
+                colors: [Color.blue.opacity(0.8), Color.purple.opacity(0.8)],
+                startPoint: .topLeading, endPoint: .bottomTrailing
+            )
+            .opacity(colorScheme == .dark ? 0.5 : 0.2)
+            .ignoresSafeArea()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    LazyVStack(spacing: 16) {
+                        ForEach(vm.completedTasks) { task in
+                            ReportRowCard(
+                                task: task,
+                                corner: corner,
+                                durationText: vm.duration(for: task),
+                                slaText: vm.slaText(for: task),
+                                onOpenPDF: {
+                                    Task {
+                                        let url = try await vm.openPDF(for: task)
                                         vm.openPDFExternally(url: url)
                                     }
-                                }
-                            }
-                            Button("Paylaş") {
-                                Task {
-                                    if let url = try? await vm.openPDF(for: task) {
-                                        selectedReportURL = url
+                                },
+                                onShare: {
+                                    Task {
+                                        let url = try await vm.openPDF(for: task)
                                         vm.share(url: url)
                                     }
                                 }
-                            }
+                            )
                         }
                     }
                 }
-
-                // Seçili görev bilgisi + alt butonlar
-                if let s = selectedTask {
-                    HStack {
-                        Text(s.title).font(.subheadline).lineLimit(1)
-                        Spacer()
-                        Button("PDF Aç") {
-                            Task {
-                                if let url = try? await vm.openPDF(for: s) {
-                                    selectedReportURL = url
-                                    vm.openPDFExternally(url: url)
-                                }
-                            }
-                        }
-                        .buttonStyle(.borderedProminent)
-
-                        Button("Paylaş") {
-                            Task {
-                                if let url = try? await vm.openPDF(for: s) {
-                                    selectedReportURL = url
-                                    vm.share(url: url)
-                                }
-                            }
-                        }
-                        .buttonStyle(.bordered)
-                    }
-                    .padding(.horizontal)
-                    .padding(.bottom, 8)
-                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 24)
             }
-            .navigationTitle("Raporlarım")
-            .onAppear { vm.loadCompletedTasks() }
-            .sheet(
-                isPresented: Binding(
-                    get: { vm.sharedURL != nil },
-                    set: { if !$0 { vm.sharedURL = nil } }
-                )
-            ) {
-                ShareSheet(activityItems: [vm.sharedURL!])
-            }
+            .scrollIndicators(.hidden)
         }
+        .safeAreaInset(edge: .top) {
+            SectionTitle("Raporlarım")
+                .padding(.horizontal, 20)
+                .padding(.top, isRoot ? 4 : -54)
+        }
+        .onAppear { vm.loadCompletedTasks() }
+        .sheet(item: $vm.sharedURL) { url in
+            ShareSheet(activityItems: [url])
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(false)
+        .toolbar(isRoot ? .hidden : .visible, for: .navigationBar)
+        .toolbarBackground(isRoot ? .hidden : .visible, for: .navigationBar)
     }
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    let activityItems: [Any]
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+    }
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
 }

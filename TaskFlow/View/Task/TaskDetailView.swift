@@ -102,11 +102,11 @@ struct TaskDetailView: View {
     
     private func nextButtonTitle(for s: TaskStatus) -> String {
         switch s {
-        case .planned: return "Yapılacak’a geçir"
-        case .todo: return "Çalışmada’ya geçir"
-        case .inProgress: return "Kontrol’e gönder"
-        case .qa: return "Tamamlandı olarak işaretle"
-        case .done: return "Tamamlandı"
+        case .planned: return "Planmayı tamamla"
+        case .todo: return "Çalışmaya başla"
+        case .inProgress: return "Kontrole gönder"
+        case .qa: return "Tamamamlaya geç"
+        case .done: return "Tamamla"
         }
     }
 }
@@ -116,7 +116,7 @@ private struct StatusChipRow: View {
     var body: some View {
         HStack(spacing: 8) {
             ForEach(TaskStatus.allCases, id: \.self) { s in
-                Text(s.rawValue)
+                Text(s.title)
                     .font(.custom("Helvetica-Bold", size: 10))
                     .padding(.horizontal, 6)
                     .padding(.vertical, 6)
