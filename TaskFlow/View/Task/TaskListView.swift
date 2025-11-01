@@ -37,7 +37,7 @@ struct TaskListView: View {
                             Text(task.title)
                                 .font(.custom("Helvetica-Bold", size: 15))
                                 .foregroundColor(.primary)
-                            Text(task.status.rawValue)
+                            Text(task.status.title)
                                 .font(.custom("Helvetica-SemiBold", size: 11))
                                 .foregroundColor(.primary.opacity(0.60))
                         }
