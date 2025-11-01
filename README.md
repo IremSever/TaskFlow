@@ -68,14 +68,21 @@ TaskFlow demonstrates how **SwiftUI** and **MVVM** can be combined to build a fu
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/90092ddc-7100-488a-8230-7e28d903c240" alt="taskflow_home" width="250"/>
-  <img src="https://github.com/user-attachments/assets/dce97ffd-1463-469c-b740-73b05ea8858f" alt="taskflow_login" width="250"/>
-  <img src="https://github.com/user-attachments/assets/e726d61c-4316-41dc-94ef-14eb1030f331" alt="taskflow_tasklist" width="250"/>
+  <img src="https://github.com/user-attachments/assets/dca8f9c8-df86-4381-8027-103411cb8226" alt="taskflow_login" width="250"/>
+  <img src="https://github.com/user-attachments/assets/747aafa5-8122-4fce-8342-177132534ea2" alt="taskflow_tasklist" width="250"/>
 </p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/c992d40e-cbb4-4f17-b965-7ef5471970d0" alt="taskflow_detail" width="250"/>
   <img src="https://github.com/user-attachments/assets/38909400-f3a8-4c72-b20f-627a644afdb8" alt="taskflow_pdf" width="250"/>
-  <img src="https://github.com/user-attachments/assets/5966a49f-9a71-47ba-ac2b-95557dfa066f" alt="taskflow_sla" width="250"/>
+  <img src="https://github.com/user-attachments/assets/93edbbc5-4d59-4b4c-8260-536a2f9982d9" alt="taskflow_sla" width="250"/>
+</p>
+
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8959a56f-19e6-4cc3-87a7-6e9cb13fccc1" alt="taskflow_settings" width="250"/>
+  <img src="https://github.com/user-attachments/assets/e2555349-690c-48be-80d8-3c231a5e6764" alt="taskflow_pdfshare" width="250"/>
+  <img src="[https://github.com/user-attachments/assets/a15c370e-8de0-4020-b224-1ed6161c87cf](https://github.com/user-attachments/assets/5966a49f-9a71-47ba-ac2b-95557dfa066f)" alt="taskflow_complete" width="250"/>
 </p>
 
 <p align="center">
@@ -83,3 +90,5 @@ TaskFlow demonstrates how **SwiftUI** and **MVVM** can be combined to build a fu
   <img src="https://github.com/user-attachments/assets/e2555349-690c-48be-80d8-3c231a5e6764" alt="taskflow_pdfshare" width="250"/>
   <img src="https://github.com/user-attachments/assets/a15c370e-8de0-4020-b224-1ed6161c87cf" alt="taskflow_complete" width="250"/>
 </p>
+
+
