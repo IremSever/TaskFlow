@@ -82,12 +82,6 @@ TaskFlow demonstrates how **SwiftUI** and **MVVM** can be combined to build a fu
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8959a56f-19e6-4cc3-87a7-6e9cb13fccc1" alt="taskflow_settings" width="250"/>
   <img src="https://github.com/user-attachments/assets/e2555349-690c-48be-80d8-3c231a5e6764" alt="taskflow_pdfshare" width="250"/>
-  <img src="[https://github.com/user-attachments/assets/5966a49f-9a71-47ba-ac2b-95557dfa066f" alt="taskflow_complete" width="250"/>
-</p>
-
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/8959a56f-19e6-4cc3-87a7-6e9cb13fccc1" alt="taskflow_settings" width="250"/>
-  <img src="https://github.com/user-attachments/assets/e2555349-690c-48be-80d8-3c231a5e6764" alt="taskflow_pdfshare" width="250"/>
   <img src="https://github.com/user-attachments/assets/a15c370e-8de0-4020-b224-1ed6161c87cf" alt="taskflow_complete" width="250"/>
 </p>
 
