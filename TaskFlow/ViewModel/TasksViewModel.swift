@@ -30,20 +30,32 @@ final class TasksViewModel: ObservableObject {
         try await repo.create(task)
     }
     
-    func advance(_ task: TFTask) async throws -> TFTask {
+    func advance(_ task: TFTask, note: String?) async throws -> TFTask {
         guard let next = task.status.next else { return task }
-        
         let doc = db.collection("tasks").document(task.id)
-        try await doc.updateData([
+        
+        var data: [String: Any] = [
             "status": next.rawValue,
             "updatedAt": FieldValue.serverTimestamp()
-        ])
+        ]
+        
+        if let t = note?.trimmingCharacters(in: .whitespacesAndNewlines), !t.isEmpty {
+            data["stageNotes.\(task.status.rawValue)"] = t
+        }
+        
+        try await doc.updateData(data)
         
         var updated = task
         updated.status = next
+        
+        var notes = updated.stageNotes ?? [:]
+        if let t = note, !t.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            notes[task.status.rawValue] = t
+        }
+        updated.stageNotes = notes
+        
         return updated
     }
-    
 }
 
 extension TFTask {

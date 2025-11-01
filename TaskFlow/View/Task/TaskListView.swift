@@ -54,14 +54,21 @@ struct TaskListView: View {
                 .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
                 .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                    Button("İlerle") { Task { try? await vm.advance(task) } }.tint(.primary.opacity(0.05))
+                    Button("İlerle") {
+                        Task {
+                            try? await vm.advance(task, note: nil)
+                        }
+                    }
+                    .tint(.primary.opacity(0.05))
+                    
                     if task.status == .done {
                         Button("PDF") {
                             Task {
                                 let url = try pdf.makeReport(.init(task: task, finishedAt: .now, author: task.assignee.name))
                                 shareURL = url
                             }
-                        }.tint(.green.opacity(0.05))
+                        }
+                        .tint(.green.opacity(0.05))
                     }
                 }
             }

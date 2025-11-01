@@ -19,6 +19,8 @@ struct TFTask: Codable, Identifiable, Hashable {
     var assignee: Assignee
     var createdBy: String
     var score: Int?
+    
+    var stageNotes: [String: String]? 
 }
 
 struct Assignee: Codable, Identifiable, Hashable {
@@ -26,6 +28,7 @@ struct Assignee: Codable, Identifiable, Hashable {
     var name: String
     var email: String
 }
+
 enum TaskStatus: String, CaseIterable, Codable {
     case planned, todo, inProgress, qa, done
 
@@ -59,6 +62,7 @@ enum TaskStatus: String, CaseIterable, Codable {
         }
     }
 }
+
 extension TaskStatus {
     var tint: Color {
         switch self {

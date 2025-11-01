@@ -17,10 +17,14 @@ struct TaskDetailView: View {
     @State private var isAdvancing = false
     private let corner: CGFloat = 22
     
+    @State private var stageNotes: [String: String] = [:]
+
     init(task: TFTask) {
         self.initialTask = task
         _task = State(initialValue: task)
+        _stageNotes = State(initialValue: task.stageNotes ?? [:])
     }
+
     
     var body: some View {
         ZStack {
@@ -50,50 +54,69 @@ struct TaskDetailView: View {
                     TaskInfoCard(task: task, corner: corner)
                     
                     StepCard(title: "Yapılacak", icon: "play.circle", tint: .blue, corner: corner) {
-                        VStack(alignment: .center, spacing: 6) {
-                            Label(task.assignee.name, systemImage: "person.circle")
-                            Text("Atanmış görev başlıyor")
-                                .font(.custom("Helvetica", size: 13))
-                                .foregroundColor(.primary.opacity(0.7))
-                        }
+                        StageNoteSection(
+                            isActive: task.status == .todo,
+                            text: Binding(
+                                get: { stageNotes[TaskStatus.todo.rawValue] ?? "" },
+                                set: { stageNotes[TaskStatus.todo.rawValue] = $0 }
+                            ),
+                            placeholder: "Yapılacak için not girin..."
+                        )
                     }
-                    
+
                     StepCard(title: "Çalışmada", icon: "hammer", tint: .purple, corner: corner) {
-                        Text("Fotoğraf/Video, Notlar, İşaretleme")
-                            .font(.custom("Helvetica", size: 13))
-                            .foregroundColor(.primary.opacity(0.7))
+                        StageNoteSection(
+                            isActive: task.status == .inProgress,
+                            text: Binding(
+                                get: { stageNotes[TaskStatus.inProgress.rawValue] ?? "" },
+                                set: { stageNotes[TaskStatus.inProgress.rawValue] = $0 }
+                            ),
+                            placeholder: "Çalışmada için not girin..."
+                        )
                     }
-                    
+
                     StepCard(title: "Kontrol", icon: "checklist", tint: .cyan, corner: corner) {
-                        Text("Checklist")
-                            .font(.custom("Helvetica", size: 13))
-                            .foregroundColor(.primary.opacity(0.7))
+                        StageNoteSection(
+                            isActive: task.status == .qa,
+                            text: Binding(
+                                get: { stageNotes[TaskStatus.qa.rawValue] ?? "" },
+                                set: { stageNotes[TaskStatus.qa.rawValue] = $0 }
+                            ),
+                            placeholder: "Kontrol için not girin..."
+                        )
                     }
-                    
+
                     StepCard(title: "Tamamlandı", icon: "checkmark.seal", tint: .green, corner: corner) {
-                        Text("Görev tamamlandı.")
-                            .font(.custom("Helvetica", size: 13))
-                            .foregroundColor(.primary.opacity(0.7))
+                        StageNoteSection(
+                            isActive: task.status == .done,
+                            text: Binding(
+                                get: { stageNotes[TaskStatus.done.rawValue] ?? "" },
+                                set: { stageNotes[TaskStatus.done.rawValue] = $0 }
+                            ),
+                            placeholder: "Tamamlandı notu..."
+                        )
                     }
+
                     PrimaryFillButton(title: nextButtonTitle(for: task.status), corner: corner) {
                         Task {
                             isAdvancing = true
                             defer { isAdvancing = false }
-                            
-                            if let updated = try? await vm.advance(task) {
+
+                            let currentStatusKey = task.status.rawValue
+                            let currentNote = stageNotes[currentStatusKey]
+
+                            if let updated = try? await vm.advance(task, note: currentNote) {
                                 task = updated
+                                stageNotes = updated.stageNotes ?? stageNotes
                             }
                         }
                     }
                     .disabled(task.status == .done || isAdvancing)
                     .opacity(isAdvancing ? 0.6 : 1.0)
                     
-                    .disabled(task.status == .done || isAdvancing)
-                    
                     Spacer(minLength: 40)
                 }
                 .padding(.horizontal, 20)
-                
             }
             .scrollIndicators(.hidden)
         }
@@ -105,8 +128,8 @@ struct TaskDetailView: View {
         case .planned: return "Planmayı tamamla"
         case .todo: return "Çalışmaya başla"
         case .inProgress: return "Kontrole gönder"
-        case .qa: return "Tamamamlaya geç"
-        case .done: return "Tamamla"
+        case .qa: return "Tamamlamaya geç"
+        case .done: return "Tamamlandı"
         }
     }
 }
