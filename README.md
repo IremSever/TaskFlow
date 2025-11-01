@@ -65,6 +65,11 @@ Data flows one way — from Firebase → ViewModel → View — ensuring consist
 TaskFlow demonstrates how **SwiftUI** and **MVVM** can be combined to build a functional, state-driven task management system. With features like **Firebase Authentication**, **SLA monitoring**, and **PDF reporting**, it provides a solid foundation for managing field operations digitally — efficiently and securely.
 
 ### App Screenshots
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/089dac04-1034-4d3a-9cc1-530f7551f217" alt="taskflow_home" width="250"/>
+  <img src="https://github.com/user-attachments/assets/a192d2f3-9d4a-4788-a066-55a41b9b9460" alt="taskflow_login" width="250"/>
+  <img src="https://github.com/user-attachments/assets/16cf8d06-5104-4732-8000-6260a6de15cc" alt="taskflow_tasklist" width="250"/>
+</p>
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/90092ddc-7100-488a-8230-7e28d903c240" alt="taskflow_home" width="250"/>
@@ -77,7 +82,6 @@ TaskFlow demonstrates how **SwiftUI** and **MVVM** can be combined to build a fu
   <img src="https://github.com/user-attachments/assets/38909400-f3a8-4c72-b20f-627a644afdb8" alt="taskflow_pdf" width="250"/>
   <img src="https://github.com/user-attachments/assets/93edbbc5-4d59-4b4c-8260-536a2f9982d9" alt="taskflow_sla" width="250"/>
 </p>
-
 
 <p align="center">
   <img src="https://github.com/user-attachments/assets/8959a56f-19e6-4cc3-87a7-6e9cb13fccc1" alt="taskflow_settings" width="250"/>
