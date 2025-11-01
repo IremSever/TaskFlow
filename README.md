@@ -1,4 +1,4 @@
-<img width="1320" height="2868" alt="Simulator Screenshot - iPhone 17 Pro Max - 2025-11-01 at 03 02 18" src="https://github.com/user-attachments/assets/a4b1628c-d7da-476e-ab08-2364bc8e8317" /># TaskFlow: Field Operations Management — Plan, Execute, Report
+# TaskFlow: Field Operations Management — Plan, Execute, Report
 **TaskFlow** is a mobile application built to streamline the daily operations of field teams. From installation and maintenance to inspection tasks, TaskFlow helps teams plan, execute, and track work efficiently. Each task follows a structured lifecycle — ensuring clarity and accountability from start to finish.
 
 Built with **SwiftUI** and the **MVVM architectural pattern**, TaskFlow delivers a responsive, modern, and reliable experience optimized for iOS devices. The app integrates **Firebase Authentication** for secure access and uses a custom **PDF generation service** to produce shareable task reports.
