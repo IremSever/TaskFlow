@@ -32,11 +32,12 @@ struct SettingsView: View {
             ScrollView {
                 VStack(spacing: 16) {
                     SettingsCard(corner: corner) {
-                        HStack {
-                            Text("Tema: Açık / Koyu / Sistem")
+                        HStack(alignment: .center) {
+                            Text("Tema")
                                 .font(.custom("Helvetica-Bold", size: 15))
                                 .foregroundColor(.primary)
-                            Spacer()
+                                .frame(maxWidth: .infinity)
+                            
                         }
                         Picker("", selection: $theme) {
                             Text("Açık").tag(0)
